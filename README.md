@@ -1,6 +1,6 @@
 <h1>Resi Cord</h1>
 
-<p><strong>resicord</strong> is a high-level <strong>Java</strong> library for <strong>resilient task execution</strong> and <strong>concurrency management</strong>. Designed for <strong>microservice architectures</strong> and distributed systems, it provides a fluent API for managing <strong>Retries</strong>, <strong>Timeouts</strong>, <strong>Bulkhead isolation</strong>, and <strong>ThreadPool concurrency</strong>, ensuring <strong>stability and resilience</strong> under high load or failures.</p>
+<p><strong>ResiCord</strong> is a high-level <strong>Java</strong> library for <strong>resilient task execution</strong> and <strong>concurrency management</strong>. Designed for <strong>microservice architectures</strong> and distributed systems, it provides a fluent API for managing <strong>Retries</strong>, <strong>Timeouts</strong>, <strong>Bulkhead isolation</strong>, and <strong>ThreadPool concurrency</strong>, ensuring <strong>stability and resilience</strong> under high load or failures.</p>
 
 <h2>Features</h2>
 <ul>
