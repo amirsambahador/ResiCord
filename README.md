@@ -22,6 +22,55 @@
         .build();
 </code></pre>
 
+
+<h3>1. <code>() -&gt; callRemoteService()</code></h3>
+<ul>
+<li>Represents the <strong>task</strong> to execute.</li>
+<li><code>Try&lt;T&gt;</code> is generic; <code>T</code> is the type of the result.</li>
+<li>Can be a <strong>lambda</strong> or a <code>Block&lt;T&gt;</code>.</li>
+<li>In this example, <code>callRemoteService()</code> simulates a remote service call.</li>
+</ul>
+
+<h3>2. <code>.retry(3, 500)</code></h3>
+<ul>
+<li><strong>retryCount = 3</strong>: Number of retry attempts if the task fails.</li>
+<li><strong>retryDelayMillis = 500</strong>: Delay between retries in milliseconds (0.5 sec).</li>
+<li>Ensures task is retried up to 3 times with 500ms pause between attempts.</li>
+</ul>
+
+<h3>3. <code>.bulkhead("service-pool", 10, 50, 1000)</code></h3>
+<p>Parameters in order:</p>
+<ol>
+<li><strong>poolId = "service-pool"</strong>: Identifier for the thread pool. Shared pools can be reused.</li>
+<li><strong>maxConcurrentThreads = 10</strong>: Max threads allowed to execute concurrently.</li>
+<li><strong>maxQueueSize = 50</strong>: Max tasks allowed in the waiting queue. Exceeding this triggers <code>BulkheadRejectedExecutionException</code>.</li>
+<li><strong>maxWaitMillis = 1000</strong>: Maximum wait time for a free thread or queue slot. Exceeding this rejects the task.</li>
+</ol>
+
+<h3>4. <code>.timeLimit(2000)</code></h3>
+<ul>
+<li><strong>timeLimitMillis = 2000</strong>: Maximum allowed execution time in milliseconds.</li>
+<li>If the task exceeds this, <code>TimeoutExecutionException</code> is thrown and the task is canceled.</li>
+</ul>
+
+<h3>5. <code>.whenCatch(e -&gt; "fallback")</code></h3>
+<ul>
+<li><strong>Exception handler</strong> for cases when retries are exhausted.</li>
+<li><code>e</code> is the exception object.</li>
+<li>Returns a fallback result, in this case <code>"fallback"</code>.</li>
+</ul>
+
+<h3>6. <code>.build()</code></h3>
+<ul>
+<li>Executes the task with all configurations applied.</li>
+<li>Returns the task result or the fallback value.</li>
+<li>Automatically handles retries, bulkhead limits, queue, and timeout.</li>
+</ul>
+
+<p><strong>Summary:</strong><br>
+These parameters allow precise control over <strong>task retries, concurrency, queue limits, timeouts, and exception handling</strong>, providing resilience and stable execution without manual thread or exception management.
+</p>
+
 <h2>Exception Handling</h2>
 <ul>
     <li><code>BulkheadRejectedExecutionException</code>: Thrown when a task cannot be executed due to concurrency or queue limits.</li>
@@ -142,4 +191,10 @@ public class Example {
     <li><strong>Concurrency Patterns:</strong> Using <code>ThreadPoolExecutor</code>, <code>Semaphore</code>, and <code>ConcurrentHashMap</code>.</li>
     <li><strong>Fluent API:</strong> Readable and maintainable code for task execution.</li>
     <li><strong>Resilient Design:</strong> Suitable for <strong>microservices</strong> and distributed systems.</li>
+</ul>
+
+<h2>Java2 Open Source Organization</h2>
+<ul>
+    <li><a href="https://www.j2os.org/eng/">http://www.j2os.org - English</a></li>
+    <li><a href="https://www.j2os.org/">http://www.j2os.org - Persian</a></li>
 </ul>
